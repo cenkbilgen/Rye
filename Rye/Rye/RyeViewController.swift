@@ -14,18 +14,19 @@ public class RyeViewController: UIViewController {
     
     var window: UIWindow?
     var ryeView: UIView!
-    var isShowing: Bool {
-        get {
-            let key = "RyeViewControllerIsShowing"
-            let value = (UserDefaults.standard.value(forKey: key) as? Bool) ?? false
-            return value
-        }
-        set {
-            let key = "RyeViewControllerIsShowing"
-            UserDefaults.standard.setValue(newValue,
-                                           forKey: key)
-        }
-    }
+    static var isShowing: Bool = false
+//    {
+//        get {
+//            let key = "RyeViewControllerIsShowing"
+//            let value = (UserDefaults.standard.value(forKey: key) as? Bool) ?? false
+//            return value
+//        }
+//        set {
+//            let key = "RyeViewControllerIsShowing"
+//            UserDefaults.standard.setValue(newValue,
+//                                           forKey: key)
+//        }
+//    }
     
     // all presentation logic is done using parentView
     var parentView: UIView {
@@ -95,9 +96,9 @@ public class RyeViewController: UIViewController {
         // check if an alert is currently showing and update the isShowing value
         switch alertType {
         case .toast:
-            isShowing = UIApplication.shared.windows.contains(where: {$0.windowLevel == .alert})
+            Self.isShowing = UIApplication.shared.windows.contains(where: {$0.windowLevel == .alert})
         case .snackBar:
-            isShowing = false
+            Self.isShowing = false
         }
     }
     

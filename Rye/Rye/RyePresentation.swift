@@ -13,6 +13,15 @@ import UIKit
 public extension RyeViewController {
     func show() {
         
+        // check if we can show the RyeView
+        guard !Self.isShowing else {
+            NSLog("An Rye is already showing. Multiple Ryes can not be presented at the same time")
+            return
+        }
+        
+        // update Rye state
+        Self.isShowing = true
+        
         switch self.alertType {
         case .toast:
             // create a new UIWindow
@@ -28,14 +37,7 @@ public extension RyeViewController {
             break
         }
         
-        // check if we can show the RyeView
-        guard !isShowing else {
-            NSLog("An Rye is already showing. Multiple Ryes can not be presented at the same time")
-            return
-        }
-        
-        // update Rye state
-        isShowing = true
+       
         
         // create RyeView
         showRye(for: viewType)
@@ -50,7 +52,7 @@ public extension RyeViewController {
     }
     
     func dismiss(completion: (() -> Void)? = nil) {
-        guard isShowing else {
+        guard Self.isShowing else {
             NSLog("Can not dismiss a Rye that it is not showing")
             return
         }
@@ -73,7 +75,7 @@ public extension RyeViewController {
             }
             
             // update Rye state
-            self.isShowing = false
+            Self.isShowing = false
             
             // call completion
             completion?()
