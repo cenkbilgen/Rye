@@ -81,6 +81,7 @@ public class RyeViewController: UIViewController {
         self.viewType = viewType
         self.timeAlive = timeAlive
         self.position = position
+        Self.isShowing = true
         
         switch viewType {
         case .standard(let configuration):
