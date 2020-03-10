@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class PassThroughWindow: UIWindow {
     public var passThroughTag: Int?
